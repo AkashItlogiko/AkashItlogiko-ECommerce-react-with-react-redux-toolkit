@@ -1,8 +1,17 @@
-import React from 'react';
-import { Categories } from '../assets/mockData';
+import React, { useEffect } from 'react';
+import { Categories, mockData } from '../assets/mockData';
 import HeroImage from '../assets/images/hero-page.png';
+import InfoSection from '../components/InfoSection';
+import CategorySection from '../components/CategorySection';
+import { setProducts } from '../redux/productSlice';
+import { useDispatch, useSelector } from 'react-redux';
 
 const Home = () => {
+  const dispatch = useDispatch();
+  const { products } = useSelector(state => state.product);
+  useEffect(() => {
+    dispatch(setProducts(mockData));
+  }, []);
   return (
     <div className="bg-white mt-2 px-4 md:px-16 lg:px-24">
       <div className="container mx-auto py-4 flex flex-col md:flex-row space-x-2">
@@ -21,7 +30,7 @@ const Home = () => {
         </div>
 
         <div className="w-full md:w-9/12 mt-8 md:mt-0 h-96 relative">
-          <img src={HeroImage} alt="" className='h-full w-full' />
+          <img src={HeroImage} alt="" className="h-full w-full" />
           <div className="absolute top-16 left-8">
             <p className="text-gray-600 md-4">Code With Hena</p>
             <h2 className="text-3xl font-bold">WELCOME TO E-SHOP</h2>
@@ -32,6 +41,16 @@ const Home = () => {
               SHOP NOW
             </button>
           </div>
+        </div>
+      </div>
+      <InfoSection />
+      <CategorySection />
+      <div>
+        <h2>Top Products</h2>
+        <div>
+          {products.slice(0, 5).map(product => (
+            <div key={product.id}>{product.name}</div>
+          ))}
         </div>
       </div>
     </div>
