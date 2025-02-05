@@ -25,6 +25,7 @@ const CategorySection = () => {
         const { title, imageUrl } = category;
         return (
           <div
+            key={index}
             id={index}
             className="relative h-64 transform transition-transform duration-300 hover:scale-105 cursor-pointer"
           >
