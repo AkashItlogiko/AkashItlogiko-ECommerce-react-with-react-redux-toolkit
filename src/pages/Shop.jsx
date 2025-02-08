@@ -5,15 +5,20 @@ import React, { useEffect, useState } from 'react';
 import { mockData } from '../assets/mockData';
 import Animation from '../assets/loading/Animation.json';
 import Lottie from 'lottie-react';
+import { useLocation } from 'react-router-dom';
 
 const Shop = () => {
   const dispatch = useDispatch();
   const { products } = useSelector(state => state.product);
-  const [loading, setLoading] = useState(true); // Step 1: Add loading state
+  const [loading, setLoading] = useState(false); // Step 1: Add loading state
+  const location = useLocation();
+  console.log(location);
 
   useEffect(() => {
-    setLoading(true); // Start loading
-    // Simulate an API call delay for demonstration
+    if (location.pathname === '/shop') {
+      setLoading(true);
+    }
+
     setTimeout(() => {
       dispatch(setProducts(mockData));
       setLoading(false); // End loading
