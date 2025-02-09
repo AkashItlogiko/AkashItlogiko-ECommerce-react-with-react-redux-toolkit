@@ -19,13 +19,14 @@ const Home = () => {
     setTimeout(() => {
       dispatch(setProducts(mockData));
       setLoading(false);
-    }, 1500);
+    }, 1000);
   }, []);
   return (
     <>
-      {' '}
       {loading ? (
-        <Lottie animationData={Animation1} />
+        <div className="h-[calc(100vh-200px)] flex items-center justify-center">
+          <Lottie animationData={Animation1} />
+        </div>
       ) : (
         <div>
           <div className="bg-white mt-2 px-4 md:px-16 lg:px-24">

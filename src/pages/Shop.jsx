@@ -12,7 +12,6 @@ const Shop = () => {
   const { products } = useSelector(state => state.product);
   const [loading, setLoading] = useState(false); // Step 1: Add loading state
   const location = useLocation();
-  console.log(location);
 
   useEffect(() => {
     if (location.pathname === '/shop') {
@@ -23,7 +22,7 @@ const Shop = () => {
       dispatch(setProducts(mockData));
       setLoading(false); // End loading
     }, 1500); // Adjust time as needed
-  }, [dispatch]);
+  }, []);
 
   return (
     <div className="mx-auto py-12 px-4 md:px-16 lg:px-24">
