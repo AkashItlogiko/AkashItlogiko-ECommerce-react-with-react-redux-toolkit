@@ -33,7 +33,7 @@ const Cart = () => {
                       <p>${product.totalPrice}</p>
                       <div className="flex">
                         <button>-</button>
-                        <p>{product.quantity}</p>
+                        <p>{product.totalQuantity}</p>
                         <button>+</button>
                       </div>
                       <p>
@@ -47,7 +47,17 @@ const Cart = () => {
                 ))}
               </div>
             </div>
-            <div></div>
+            <div>
+              <h3>CART TOTAL:</h3>
+              <div>
+                <span>Totla Items:</span>
+                <span>{cart.totalQuantity}</span>
+              </div>
+              <div>
+                <p>Shipping:</p>
+                <p>Shipping to:</p>
+              </div>
+            </div>
           </div>
         </div>
       ) : (
