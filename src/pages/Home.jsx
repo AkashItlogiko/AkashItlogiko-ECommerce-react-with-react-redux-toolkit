@@ -70,7 +70,7 @@ const Home = () => {
               </h2>
               <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-6 cursor-pointer">
                 {products.slice(0, 5).map(product => (
-                  <ProductCard product={product} />
+                  <ProductCard key={product.id} product={product} />
                 ))}
               </div>
             </div>
