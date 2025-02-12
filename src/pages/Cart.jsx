@@ -1,14 +1,23 @@
 import React, { useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import EmtyCart from '../assets/images/emptycart.png';
 import { FaTrashAlt } from 'react-icons/fa';
 import Modal from '../components/Modal';
 import ChangeAddress from '../components/ChangeAddress';
+import {
+  increaseQuantity,
+  decreaseQuantity,
+  removeFromCart,
+} from '../redux/cartSlice';
 
 const Cart = () => {
-  const cart = useSelector(state => state.cart);
+  const cart = useSelector(state => {
+    return state.cart;
+  });
   const [address, setAddress] = useState('main stret,0012');
   const [isModelOpen, setModelOpen] = useState(false);
+  const dispatch = useDispatch();
+  console.log('cart:', cart);
   return (
     <div className="container justify-between mx-auto py-8 min-h-96 px-4 md:px-16 lg:px-24 ">
       {cart.products.length > 0 ? (
@@ -43,16 +52,27 @@ const Cart = () => {
                     <div className="flex space-x-12  items-center ">
                       <p>${product.totalPrice}</p>
                       <div className="flex items-center justify-center border">
-                        <button className="text-xl font-bold px-1.5 border-r">
+                        <button
+                          className="text-xl font-bold px-1.5 border-r"
+                          onClick={() => dispatch(decreaseQuantity(product.id))}
+                        >
                           -
                         </button>
-                        <p className="text-xl px-2">{product.totalQuantity}</p>
-                        <button className="text-xl px-1 border-1">+</button>
+                        <p className="text-xl px-2">{product.quantity}</p>
+                        <button
+                          className="text-xl px-1 border-1"
+                          onClick={() => dispatch(increaseQuantity(product.id))}
+                        >
+                          +
+                        </button>
                       </div>
                       <p>
                         ${(product.quantity * product.totalPrice).toFixed(2)}
                       </p>
-                      <button className="text-red-500 hover:text-red-700">
+                      <button
+                        className="text-red-500 hover:text-red-700"
+                        onClick={() => dispatch(removeFromCart(product.id))}
+                      >
                         <FaTrashAlt />
                       </button>
                     </div>
