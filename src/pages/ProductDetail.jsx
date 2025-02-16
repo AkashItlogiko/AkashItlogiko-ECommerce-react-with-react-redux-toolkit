@@ -10,9 +10,7 @@ const ProductDetail = () => {
   const [product, setProducts] = useState();
 
   useEffect(() => {
-    const newProduct = products.find(
-      product => product => product.id === parseInt(id)
-    );
+    const newProduct = products.find(product => product.id === parseInt(id));
     setProducts(newProduct);
   }, [id, products]);
   if (!product) return <div>Loadding ...</div>;

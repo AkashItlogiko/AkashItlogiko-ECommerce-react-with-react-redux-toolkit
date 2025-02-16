@@ -21,7 +21,7 @@ const Order = ({order}) => {
                     {order.products.map(product =>(
                         <div key={product.id} className='flex justify-between mt-2'>
                           <p>{product.name} (x{product.quantity})</p>  
-                          <p>{product.totalPrice * product.quantity}</p>
+                          <p>${product.totalPrice * product.quantity}</p>
                         </div>
                     ))}
                 </div>
