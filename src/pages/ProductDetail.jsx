@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { FaCarSide } from 'react-icons/fa';
 import { FaQuestion } from 'react-icons/fa6';
-import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import Animation3 from '../assets/loading/Animation3.json';
 import Lottie from 'lottie-react';
@@ -9,13 +8,12 @@ import { mockData } from '../assets/mockData';
 
 const ProductDetail = () => {
   const { id } = useParams();
-  const products = useSelector(state => state.product.products);
   const [product, setProducts] = useState();
   const [loading, setLoading] = useState(true);
   const [quantity, setQuantity] = useState(1);
 
   useEffect(() => {
-    const newProduct = mockData.find(product => product.id === parseInt(id));
+    const newProduct = mockData?.find(product => product?.id === parseInt(id));
     setProducts(newProduct);
   }, []);
 
