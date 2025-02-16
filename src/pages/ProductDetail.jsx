@@ -5,6 +5,7 @@ import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import Animation3 from '../assets/loading/Animation3.json';
 import Lottie from 'lottie-react';
+import { mockData } from '../assets/mockData';
 
 const ProductDetail = () => {
   const { id } = useParams();
@@ -14,7 +15,7 @@ const ProductDetail = () => {
   const [quantity, setQuantity] = useState(1);
 
   useEffect(() => {
-    const newProduct = products.find(product => product.id === parseInt(id));
+    const newProduct = mockData.find(product => product.id === parseInt(id));
     setProducts(newProduct);
   }, []);
 
