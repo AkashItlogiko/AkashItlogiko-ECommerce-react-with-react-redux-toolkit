@@ -11,7 +11,7 @@ const ProductDetail = () => {
 
   useEffect(() => {
     const newProduct = products.find(
-      product => product => product.div === parseInt(id)
+      product => product => product.id === parseInt(id)
     );
     setProducts(newProduct);
   }, [id, products]);
