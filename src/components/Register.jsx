@@ -3,7 +3,7 @@ import React from 'react';
 const Register = ({ openLoging }) => {
   return (
     <div>
-      <h2 className="text-2xl font-bold mb-4">Sing Up</h2>
+      <h2 className="text-2xl font-bold mb-4">Sign Up</h2>
       <form>
         <div className="mb-4">
           <label className="block text-gray-700" htmlFor="">
@@ -27,7 +27,7 @@ const Register = ({ openLoging }) => {
 
         <div className="mb-4">
           <button type="submit" className="w-full bg-red-600 text-white py-2">
-            Sing up
+            Sign up
           </button>
         </div>
       </form>
