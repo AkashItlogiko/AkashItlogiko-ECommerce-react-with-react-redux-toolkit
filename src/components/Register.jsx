@@ -15,6 +15,16 @@ const Register = ({ openLoging }) => {
             placeholder="Enter Name"
           />
         </div>
+        <div className="mb-4">
+          <label className="block text-gray-700" htmlFor="">
+            Email
+          </label>
+          <input
+            type="text"
+            className="w-full px-3 py-2 border"
+            placeholder="Enter Email"
+          />
+        </div>
 
         <div className="mb-4">
           <label className="block text-gray-700">Password</label>

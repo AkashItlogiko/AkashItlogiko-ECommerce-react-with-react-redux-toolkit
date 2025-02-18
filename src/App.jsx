@@ -9,9 +9,10 @@ import { useState } from 'react';
 import Order from './pages/Order';
 import FilterData from './pages/FilterData';
 import ProductDetail from './pages/ProductDetail';
+import Error from './pages/Error';
 
 function App() {
-  const[order,setOrder]=useState(null)
+  const [order, setOrder] = useState(null);
   return (
     <BrowserRouter>
       <Navbar />
@@ -28,7 +29,8 @@ function App() {
           element={<Order order={order} />}
         ></Route>
         <Route path="/filter-data" element={<FilterData />}></Route>
-        <Route path="/product/:id" element={<ProductDetail/>}></Route>
+        <Route path="/product/:id" element={<ProductDetail />}></Route>
+      <Route path="/*" element={<Error />}></Route>
       </Routes>
       <Footer />
     </BrowserRouter>
