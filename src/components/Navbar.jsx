@@ -7,19 +7,17 @@ import Register from './Register';
 import Modal from './Modal';
 import { setSearchTerm } from '../redux/productSlice';
 
-
 const Navbar = () => {
   const [isModelOpen, setIsModelOpen] = useState(false);
   const [isLogin, setIsLogin] = useState(true);
   const [search, setSearch] = useState();
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  
 
   const handleSearch = e => {
     e.preventDefault();
     dispatch(setSearchTerm(search));
-    navigate('/filter-data')
+    navigate('/filter-data');
   };
 
   const openSignUp = () => {
