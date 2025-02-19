@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { FaSearch, FaShoppingCart, FaUser } from 'react-icons/fa';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
@@ -14,11 +14,11 @@ const Navbar = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const handleSearch = e => {
-    e.preventDefault();
+  useEffect(() => {
     dispatch(setSearchTerm(search));
     navigate('/filter-data');
-  };
+  }, [search]);
+  // };
 
   const openSignUp = () => {
     setIsLogin(false);
@@ -37,8 +37,14 @@ const Navbar = () => {
           <Link to="/">e-Shop</Link>
         </div>
         <div className="relative flex-1 mx-4">
-          <form onSubmit={handleSearch}>
+          <form
+            onSubmit={e => {
+              e.preventDefault();
+              setSearch(e.target.search.value);
+            }}
+          >
             <input
+              name="search"
               type="text"
               placeholder="Search Product"
               className="w-full border rounded-full py-2 px-2 shadow-md"

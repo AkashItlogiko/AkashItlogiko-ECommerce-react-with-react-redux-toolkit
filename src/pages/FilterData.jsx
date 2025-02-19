@@ -1,10 +1,11 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import ProductCard from '../components/ProductCard';
-import NoProduct from '../assets/images/not_found.png'
+import NoProduct from '../assets/images/not_found.png';
 
 const FilterData = () => {
   const filterProducts = useSelector(state => state.product.filteredData);
+   
   return (
     <div className="mx-auto py-12 px-4 md:px-16 lg:px-24">
       {filterProducts.length > 0 ? (
