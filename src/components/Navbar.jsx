@@ -5,7 +5,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import Login from './Login';
 import Register from './Register';
 import Modal from './Modal';
-import { setSearchTerm } from '../redux/productSlice';
+import { setSearchTerm, setLoadingState } from '../redux/productSlice';
 
 const Navbar = () => {
   const [isModelOpen, setIsModelOpen] = useState(false);
@@ -16,16 +16,18 @@ const Navbar = () => {
 
   useEffect(() => {
     dispatch(setSearchTerm(search));
+    setTimeout(() => {
+      dispatch(setLoadingState());
+    }, 500);
     navigate('/filter-data');
   }, [search]);
-  // };
 
   const openSignUp = () => {
-    setIsLogin(false);
+    // setIsLogin(false);
     setIsModelOpen(true);
   };
   const openLoging = () => {
-    setIsLogin(true);
+    // setIsLogin(true);
     setIsModelOpen(true);
   };
 
