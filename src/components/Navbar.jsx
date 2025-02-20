@@ -10,16 +10,18 @@ import { setSearchTerm, setLoadingState } from '../redux/productSlice';
 const Navbar = () => {
   const [isModelOpen, setIsModelOpen] = useState(false);
   const [isLogin, setIsLogin] = useState(false);
-  const [search, setSearch] = useState();
+  const [search, setSearch] = useState('');
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   useEffect(() => {
-    dispatch(setSearchTerm(search));
-    setTimeout(() => {
-      dispatch(setLoadingState());
-    }, 500);
-    navigate('/filter-data');
+    if (search !== '') {
+      dispatch(setSearchTerm(search));
+      setTimeout(() => {
+        dispatch(setLoadingState());
+      }, 500);
+      navigate('/filter-data');
+    }
   }, [search]);
 
   const openSignUp = () => {

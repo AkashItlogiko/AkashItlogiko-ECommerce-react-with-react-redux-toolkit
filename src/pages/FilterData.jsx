@@ -1,4 +1,3 @@
-import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import ProductCard from '../components/ProductCard';
 import NoProduct from '../assets/images/not_found.png';
@@ -10,13 +9,6 @@ const FilterData = () => {
   const isProductFetching = useSelector(
     state => state.product.isProductFetching
   );
-
-  // useEffect(() => {
-  //   setIsLogin(true);
-  //   setTimeout(() => {
-  //     setIsLogin(false);
-  //   }, 1000);
-  // }, []);
 
   return (
     <>
