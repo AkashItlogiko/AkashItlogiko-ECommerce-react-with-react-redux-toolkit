@@ -9,7 +9,7 @@ import { setSearchTerm, setLoadingState } from '../redux/productSlice';
 
 const Navbar = () => {
   const [isModelOpen, setIsModelOpen] = useState(false);
-  const [isLogin, setIsLogin] = useState(true);
+  const [isLogin, setIsLogin] = useState(false);
   const [search, setSearch] = useState();
   const dispatch = useDispatch();
   const navigate = useNavigate();
