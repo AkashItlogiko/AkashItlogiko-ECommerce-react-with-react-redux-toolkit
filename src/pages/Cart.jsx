@@ -18,6 +18,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 const Cart = () => {
   const cart = useSelector(state => {
+    console.log(state.cart);
     return state.cart;
   });
   const [address, setAddress] = useState('main street, 0012');
@@ -50,72 +51,79 @@ const Cart = () => {
                 </div>
               </div>
 
-              {cart.products.map(product => (
-                <div
-                  key={product.id}
-                  className="flex items-center justify-between p-3 border-b"
-                >
-                  <div className="md:flex items-center space-x-4 ">
-                    <img
-                      src={product.Image}
-                      alt=""
-                      className="w-16 h-16 object-contain rounded"
-                    />
-                    <div className="flex-1 ml-4">
-                      <h3 className="text-lg font-semibold">{product.name}</h3>
-                    </div>
-                    <div className="flex space-x-12 items-center">
-                      <p>${product.totalPrice}</p>
-
-                      <div className="flex items-center justify-center border">
-                        <button
-                          className="text-xl font-bold px-1.5 border-r"
-                          onClick={() => dispatch(decreaseQuantity(product.id))}
-                        >
-                          -
-                        </button>
-                        <p className="text-xl px-2">{product.quantity}</p>
-                        <button
-                          className="text-xl px-1 border-1"
-                          onClick={() => dispatch(increaseQuantity(product.id))}
-                        >
-                          +
-                        </button>
+              <div>
+                {cart.products.map(product => (
+                  <div
+                    key={product.id}
+                    className="flex items-center justify-between p-3 border-b"
+                  >
+                    <div className="md:flex items-center space-x-4 ">
+                      <img
+                        src={product.Image}
+                        alt={product.name}
+                        className="w-16 h-16 object-contain rounded"
+                      />
+                      <div className="flex-1 ml-4">
+                        <h3 className="text-lg font-semibold">
+                          {product.name}
+                        </h3>
                       </div>
-                      <p>
-                        ${(product.quantity * product.totalPrice).toFixed(2)}
-                      </p>
+                      <div className="flex space-x-12 items-center">
+                        <p>${product.price}</p>
 
-                      {confirmationId === product.id ? (
-                        <div className="flex items-center space-x-4">
-                          <p className="text-gray-700 text-sm md:text-xs font-semibold">
-                            Remove this item?
-                          </p>
+                        <div className="flex items-center justify-center border">
                           <button
-                            className="bg-red-600 px-6 py-1 text-xs text-white border rounded hover:text-white-700"
-                            onClick={() => handleRemove(product.id)}
+                            disabled={product.quantity === 1 ? true : false}
+                            className="text-xl font-bold px-1.5 border-r"
+                            onClick={() =>
+                              dispatch(decreaseQuantity(product.id))
+                            }
                           >
-                            Yes
+                            -
                           </button>
+                          <p className="text-xl px-2">{product.quantity}</p>
                           <button
-                            className="bg-purple-400 px-4 py-1  text-xs text-white rounded hover:text-primary-700"
-                            onClick={() => setConfirmationId(null)}
+                            className="text-xl px-1 border-1"
+                            onClick={() =>
+                              dispatch(increaseQuantity(product.id))
+                            }
                           >
-                            Cancel
+                            +
                           </button>
                         </div>
-                      ) : (
-                        <button
-                          className="text-red-500 hover:text-red-700"
-                          onClick={() => setConfirmationId(product.id)}
-                        >
-                          <FaTrashAlt />
-                        </button>
-                      )}
+                        <p>${(product.quantity * product.price).toFixed(2)}</p>
+
+                        {confirmationId === product.id ? (
+                          <div className="flex items-center space-x-4">
+                            <p className="text-gray-700 text-sm md:text-xs  font-semibold">
+                              Remove this item?
+                            </p>
+                            <button
+                              className="bg-red-600 px-6 py-1 text-xs text-white border rounded  hover:text-white-700"
+                              onClick={() => handleRemove(product.id)}
+                            >
+                              Yes
+                            </button>
+                            <button
+                              className="bg-purple-400 px-4 py-1  text-xs text-white rounded hover:text-primary-700"
+                              onClick={() => setConfirmationId(null)}
+                            >
+                              Cancel
+                            </button>
+                          </div>
+                        ) : (
+                          <button
+                            className="text-red-500 hover:text-red-700"
+                            onClick={() => setConfirmationId(product.id)}
+                          >
+                            <FaTrashAlt />
+                          </button>
+                        )}
+                      </div>
                     </div>
                   </div>
-                </div>
-              ))}
+                ))}
+              </div>
             </div>
             <div className="md:w-1/3 bg-white p-6 rounded-lg shadow-md border">
               <h3 className="text-sm font-semibold mb-5">CART TOTALS</h3>
@@ -139,6 +147,7 @@ const Cart = () => {
               </div>
               <div className="flex justify-between mb-4">
                 <span>Total Price:</span>
+
                 <span>${cart.totalPrice.toFixed(2)}</span>
               </div>
               <button

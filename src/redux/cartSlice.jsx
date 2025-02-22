@@ -16,30 +16,32 @@ const cartSlice = createSlice({
 
       if (existingItem) {
         existingItem.quantity++;
-        existingItem.totalPrice += newItem.price;
       } else {
         state.products.push({
           id: newItem.id,
           name: newItem.name,
           quantity: 1,
-          totalPrice: newItem.price,
-          Image: newItem.image, // Fixed the property case for consistency
+          price: newItem.price, // store the base price
+          Image: newItem.image, // ensure the key name is consistent
         });
       }
-
-      state.totalPrice += newItem.price;
+      // Recalculate totals
       state.totalQuantity++;
+      state.totalPrice += newItem.price;
     },
+
     removeFromCart(state, action) {
       const id = action.payload;
       const itemToRemove = state.products.find(item => item.id === id);
 
       if (itemToRemove) {
-        state.totalPrice -= itemToRemove.totalPrice;
+        // Deduct the product's quantity and subtotal from overall totals
         state.totalQuantity -= itemToRemove.quantity;
+        state.totalPrice -= itemToRemove.price * itemToRemove.quantity;
         state.products = state.products.filter(item => item.id !== id);
       }
     },
+
     increaseQuantity(state, action) {
       const id = action.payload;
       const existingItem = state.products.find(item => item.id === id);
@@ -47,19 +49,24 @@ const cartSlice = createSlice({
       if (existingItem) {
         existingItem.quantity++;
         state.totalQuantity++;
-        state.totalPrice += existingItem.totalPrice;
+        state.totalPrice += existingItem.price;
       }
     },
+
     decreaseQuantity(state, action) {
       const id = action.payload;
       const existingItem = state.products.find(item => item.id === id);
-      if (existingItem && existingItem.quantity > 1) {
-        existingItem.quantity--;
-        // existingItem.totalPrice -= existingItem.price;
-        state.totalQuantity--;
-        state.totalPrice -= existingItem.totalPrice;
 
-        if (existingItem.quantity === 0) {
+      if (existingItem) {
+        // Only decrease if quantity is more than 1
+        if (existingItem.quantity > 1) {
+          existingItem.quantity--;
+          state.totalQuantity--;
+          state.totalPrice -= existingItem.price;
+        } else {
+          // If quantity goes to 0, remove the item
+          state.totalQuantity -= 1;
+          state.totalPrice -= existingItem.price;
           state.products = state.products.filter(item => item.id !== id);
         }
       }
