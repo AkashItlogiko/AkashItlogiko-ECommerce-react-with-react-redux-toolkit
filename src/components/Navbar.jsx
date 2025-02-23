@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { FaSearch, FaShoppingCart, FaUser } from 'react-icons/fa';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link, useNavigate } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import Login from './Login';
 import Register from './Register';
 import Modal from './Modal';
@@ -25,20 +25,21 @@ const Navbar = () => {
   }, [search]);
 
   const openSignUp = () => {
-    // setIsLogin(false);
     setIsModelOpen(true);
   };
   const openLoging = () => {
-    // setIsLogin(true);
     setIsModelOpen(true);
   };
 
   const products = useSelector(state => state.cart.products);
+
   return (
     <nav className="bg-white shadow-md">
-      <div className="container mx-auto px-4 md:px-16 lg:px-24 py-4 flex justify-between items-center ">
+      <div className="container mx-auto px-4 md:px-16 lg:px-24 py-4 flex justify-between items-center">
         <div className="text-lg font-bold">
-          <Link to="/">e-Shop</Link>
+          <NavLink to="/" className="hover:text-red-500">
+            e-Shop
+          </NavLink>
         </div>
         <div className="relative flex-1 mx-4">
           <form
@@ -55,18 +56,18 @@ const Navbar = () => {
               onChange={e => setSearch(e.target.value)}
               required
             />
-            <FaSearch className="absolute top-3 right-3 text-red-500"></FaSearch>
+            <FaSearch className="absolute top-3 right-3 text-red-500" />
           </form>
         </div>
         <div className="flex items-center space-x-4">
-          <Link to="/cart" className="relative">
+          <NavLink to="/cart" className="relative">
             <FaShoppingCart className="text-lg" />
             {products.length > 0 && (
               <span className="absolute top-0 text-xs w-3 left-3 bg-red-600 rounded-full flex justify-center items-center text-white">
                 {products.length}
               </span>
             )}
-          </Link>
+          </NavLink>
           <button
             className="hidden md:block"
             onClick={() => setIsModelOpen(true)}
@@ -78,19 +79,39 @@ const Navbar = () => {
           </button>
         </div>
       </div>
-      <div className="flex items-center justify-center space-x-10 py-4 text-sm font-bold ">
-        <Link to={'/'} className="hover:underline">
+      <div className="flex items-center justify-center space-x-10 py-4 text-sm font-bold">
+        <NavLink
+          to="/"
+          className={({ isActive }) =>
+            isActive ? 'text-red-500 underline' : 'hover:underline'
+          }
+        >
           Home
-        </Link>
-        <Link to="/shop" className="hover:underline">
+        </NavLink>
+        <NavLink
+          to="/shop"
+          className={({ isActive }) =>
+            isActive ? 'text-red-500 underline' : 'hover:underline'
+          }
+        >
           Shop
-        </Link>
-        <Link to={'/'} className="hover:underline">
+        </NavLink>
+        <NavLink
+          to="/contact"
+          className={({ isActive }) =>
+            isActive ? 'text-red-500 underline' : 'hover:underline'
+          }
+        >
           Contact
-        </Link>
-        <Link to={'/'} className="hover:underline">
+        </NavLink>
+        <NavLink
+          to="/about"
+          className={({ isActive }) =>
+            isActive ? 'text-red-500 underline' : 'hover:underline'
+          }
+        >
           About
-        </Link>
+        </NavLink>
       </div>
       <Modal isModelOpen={isModelOpen} setIsModelOpen={setIsModelOpen}>
         {isLogin ? (
