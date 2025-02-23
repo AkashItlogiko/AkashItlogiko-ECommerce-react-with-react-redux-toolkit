@@ -1,9 +1,14 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-const initialState = {
+// Load initial state from local storage or use default values
+const initialState = JSON.parse(localStorage.getItem('cart')) || {
   products: [],
   totalQuantity: 0,
   totalPrice: 0,
+};
+
+const saveToLocalStorage = state => {
+  localStorage.setItem('cart', JSON.stringify(state));
 };
 
 const cartSlice = createSlice({
@@ -28,6 +33,9 @@ const cartSlice = createSlice({
       // Recalculate totals
       state.totalQuantity++;
       state.totalPrice += newItem.price;
+
+      // Save updated state to local storage
+      saveToLocalStorage(state);
     },
 
     removeFromCart(state, action) {
@@ -39,6 +47,9 @@ const cartSlice = createSlice({
         state.totalQuantity -= itemToRemove.quantity;
         state.totalPrice -= itemToRemove.price * itemToRemove.quantity;
         state.products = state.products.filter(item => item.id !== id);
+
+        // Save updated state to local storage
+        saveToLocalStorage(state);
       }
     },
 
@@ -50,6 +61,9 @@ const cartSlice = createSlice({
         existingItem.quantity++;
         state.totalQuantity++;
         state.totalPrice += existingItem.price;
+
+        // Save updated state to local storage
+        saveToLocalStorage(state);
       }
     },
 
@@ -69,6 +83,9 @@ const cartSlice = createSlice({
           state.totalPrice -= existingItem.price;
           state.products = state.products.filter(item => item.id !== id);
         }
+
+        // Save updated state to local storage
+        saveToLocalStorage(state);
       }
     },
   },
