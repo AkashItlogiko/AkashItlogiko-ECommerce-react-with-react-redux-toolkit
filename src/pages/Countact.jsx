@@ -19,7 +19,7 @@ const Contact = () => {
 
       setTimeout(() => {
         setLoading(false); // Stop loading after 2 seconds (simulating page load)
-      }, 2000); // You can adjust the timeout duration as needed
+      }, 1500); // You can adjust the timeout duration as needed
     }
   }, [location.pathname]);
 
