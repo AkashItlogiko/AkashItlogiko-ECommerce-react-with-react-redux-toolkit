@@ -10,6 +10,8 @@ import Order from './pages/Order';
 import FilterData from './pages/FilterData';
 import ProductDetail from './pages/ProductDetail';
 import Error from './pages/Error';
+import Countact from './pages/Countact';
+import About from './pages/About';
 
 function App() {
   const [order, setOrder] = useState(null);
@@ -20,6 +22,8 @@ function App() {
         <Route path="/" element={<Home />}></Route>
         <Route path="/shop" element={<Shop />}></Route>
         <Route path="/cart" element={<Cart />}></Route>
+        <Route path="/contact" element={<Countact />}></Route>
+        <Route path="/about" element={<About />}></Route>
         <Route
           path="/checkout"
           element={<Checkout setOrder={setOrder} />}
@@ -30,7 +34,7 @@ function App() {
         ></Route>
         <Route path="/filter-data" element={<FilterData />}></Route>
         <Route path="/product/:id" element={<ProductDetail />}></Route>
-      <Route path="/*" element={<Error />}></Route>
+        <Route path="/*" element={<Error />}></Route>
       </Routes>
       <Footer />
     </BrowserRouter>
